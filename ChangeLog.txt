@@ -1,0 +1,122 @@
+V1.8 - 2018.3.18 - Sam Hotiky
+
+	- construct the basic project, bsp contains key, led and uart0. 
+
+V1.9 - 2018.3.22 - Sam Hotiky
+
+	- the led is ok
+
+V1.9.1 - 2018.3.24 - Sam Hotiky
+
+	- make the uart0 and key ok
+
+V1.9.2 - 2018.3.25 - Sam Hotiky
+
+	- join the vsnprintf into project
+
+V2 - 2018.3.25 - Sam Hotiky
+
+	- led, key, uart0, and printf are ok
+
+V2.1 - 2018.3.25 - Sam Hotiky
+
+	- make key and uart0 has irq, but failed
+
+V2.3 - 2018.3.27 - Sam Hotiky
+
+	- add MMU and try to fix the ARM irq problem with MMU, and it works
+	finally
+
+V2.6 - 2018.4.3 - Sam Hotiky
+
+	- the MMU is availale now, but need refine
+
+V2.7 - 2018.4.3 - Sam Hotiky
+
+	- make the s3c2440's interrupt vector table work with MMU's remap table,
+	but not perfect
+
+V2.8 - 2018.4.3 - Sam Hotiky
+
+	- make the s3c2440's interrupt vector table work with MMU's remap table
+
+V3 - 2018.4.5 - Sam Hotiky
+
+	- the MMU can work only without irq, this version keep the MMU code, but
+	doesn't use MMU to remap irq vector
+
+V3.1 - 2018.4.6 - Sam Hotiky
+
+	- add nand flash driver
+	
+V3.2 - 2018.4.9 - Sam Hotiky
+
+	- edit Makefile, delete the oflash support, because I won't use oflash to
+	download .bin file anymore, I use the MiniTools
+	- MMU working with remapped irq is OK now !!!
+
+V4 - 2018.4.12 - Sam Hotiky
+	- fix bug : when irq comes, the main routine crashed
+
+V4.1 - 2018.4.12 - Sam Hotiky
+	- edit the Makefile, make it print simply
+
+V4.2 - 2018.4.14 - Sam Hotiky
+	- fix nand flash bug : first block fulled of 0 after erase, should be 0xFF
+	instead
+
+V4.3 - 2018.4.30 - Sam Hotiky
+    - continue to fix the nand flash bug
+	- fix a compile bug : you can't use std c lib functions in your code before this version, but
+	  now you can ! cause I add libc.a into linking(I finally find the way) !
+	- fix a uart irq bug : the uart rx irq doesn't need to be clear irq pending bit for twice indeed
+	  one time is enough when I deleted the "get_cpsr()" in the uart rx irq routine, I found that
+
+V4.4 - 2018.5.5 - Sam Hotiky
+    - fix the shell feature
+
+V4.5 - 2018.5.7 - Sam Hotiky
+	- make shell work well
+
+V4.6 - 2017.5.7 - Sam Hotiky
+	- make the startup.S work in 400MHz, let the board boot faster
+	- still has a bug : the nand driver's erase function always return failed, but it erase successfully indeed
+
+
+V4.7 - 2018.5.12 - Sam Hotiky
+	- add gpio irq and timer irq
+
+V4.8 - 2018.6.30 - Sam Hotiky
+	- add clock_enable() function, every peripheral must enable it's clock before initialization
+	- fix the nand block erase bug, this bug caused nand erase operation always return failed, but it erased successfully in deed
+
+V4.9 - 2018.7.3
+	- refine the key.c, when EINTx comes, read the register EINTPEND to get the irq source, not the GPxDAT
+
+V5 - 2018.7.4
+	- test the uart if it can cause an interrupt by sending a break signal, the result is : it can't
+
+V5.1 - 2018.7.22
+	- fix many compile warnings and linking errors while the compiler is changing from
+	  v3.4.5 to v4.3.2
+
+V5.2 - 2018.7.25
+	- don't copy the bin file to /mnt/, I don't need this any more
+	- It seems that the arm-linux-gcc version 4.3.2 compiles the .S file could make a wrong executive bin file
+      so I use the v3.4.5 back, and name it as old-arm-linux-gcc
+
+V5.3 - 2018.7.31
+	- sorry, I stil need copy the bin file to a share folder in Makefile, that's very convenient when downloading
+      bin file to board in Windows
+	- add the timer4 hardware driver support
+	- fix the irq handler bug, this bug made key irq act slow; all peripheral's irq affect each other
+
+V5.4 - 2018.8.8
+	- add nanderase_chip function in shell.c
+
+V5.5 - 2018.8.20
+	- make uart rx fifo mode works, but the tx fifo mode hadn't been tested yet
+	- make shell works when you use a *term to observe the uart
+
+V5.6 - 2018.10.1
+	- add LCD support
