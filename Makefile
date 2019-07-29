@@ -1,6 +1,6 @@
 #======================================================================
 # specify the compiler and it's compile options
-CROSS_COMPILER = arm-linux-
+CROSS_COMPILER ?= arm-linux-
 CFLAGS = -Wall -O0 -g
 
 # target files, remember:the startup.S(containing the entry function of 
@@ -37,10 +37,9 @@ INC = -I./1_level \
       -I./3_level/bsp/timer \
       -I./3_level/bsp/lcd
 
-BIN_DIR = /mnt/hgfs/share_with_ubuntu/
-
-SLIB =	/home/sam/Work/compiler/gcc-3.4.5-glibc-2.3.6/arm-linux/lib/libc.a \
-		/home/sam/Work/compiler/gcc-3.4.5-glibc-2.3.6/lib/gcc/arm-linux/3.4.5/libgcc.a
+# you may need to add some archive lib here
+SLIB =	`$(CC) -print-file-name=libc.a` \
+        `$(CC) -print-file-name=libgcc.a`
 
 #----------------------------------------------------------------------
 TARGET ?= target
@@ -65,8 +64,6 @@ $(TARGET) : $(OBJ)
 	@$(OBJCOPY) -O binary -S $(TARGET_ELF) $(TARGET_BIN)
 	@$(OBJDUMP) -D -m arm $(TARGET_ELF) > $(TARGET_DIS)
 	@echo "  "$(TARGET_BIN)" is ready"
-	@cp $(TARGET_BIN) $(BIN_DIR)
-	@echo "  "$(TARGET_BIN)" has been copy to "$(BIN_DIR)""
 	@echo "  end\n"
 
 %.o : %.c
