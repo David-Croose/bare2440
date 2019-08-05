@@ -43,8 +43,10 @@ int main(void)
 	led_ctrl(2, 0);
 	led_ctrl(4, 0);
 	key_irq_enable();
-	/// timer0_init(1000);
-	/// timer4_init(100);
+	timer0_init(1000);
+    timer0_disable();
+	timer4_init(100);
+    timer4_disable();
 	my_printf("start\r\n");
 	my_printf("__new_vector_start=0x%08x\r\n", &__new_vector_start);
 	my_printf("__new_vector_end=0x%08x\r\n", &__new_vector_end);
