@@ -4,14 +4,11 @@ u32 get_cpsr(void);
 
 void reset_irq_handler(void)
 {
-	extern int main(void);
-	
-	main();
-	// my_printf("reset_irq_handler, cpsr = %#x\r\n", get_cpsr());
-	// while(1)
-	// {
+	my_printf("reset_irq_handler, cpsr = %#x\r\n", get_cpsr());
+	while(1)
+	{
 
-	// }
+	}
 }
 
 void undef_irq_handler(void)
@@ -52,6 +49,7 @@ void data_abort_handler(void)
 
 void not_used_handler(void)
 {
+	my_printf("not_used_handler, cpsr = %#x\r\n", get_cpsr());
 	while(1)
 	{
 
@@ -63,7 +61,7 @@ void not_used_handler(void)
  */
 void irq_handler(void)
 {
-	my_printf("irq_handler, cpsr = %#x\r\n", get_cpsr());
+	/// my_printf("irq_handler, cpsr = %#x\r\n", get_cpsr());
 	u32 i;
 
 	vu32 intpnd    = *(vu32 *)INTPND;
