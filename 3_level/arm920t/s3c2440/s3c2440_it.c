@@ -63,7 +63,7 @@ void not_used_handler(void)
  */
 void irq_handler(void)
 {
-	/// my_printf("irq_handler, cpsr = %#x\r\n", get_cpsr());
+	my_printf("irq_handler, cpsr = %#x\r\n", get_cpsr());
 	u32 i;
 
 	vu32 intpnd    = *(vu32 *)INTPND;

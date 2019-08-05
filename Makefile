@@ -16,7 +16,6 @@ SRC = ./3_level/arm920t/s3c2440/s3c2440_startup.S \
 	  ./3_level/bsp/uart/uart0.c \
 	  ./3_level/bsp/timer/timer0.c \
 	  ./3_level/bsp/timer/timer4.c \
-	  ./3_level/bsp/nand/nand_boot.c \
 	  ./3_level/bsp/nand/nand.c \
 	  ./3_level/bsp/lcd/lcd.c \
 	  ./1_level/main.c \

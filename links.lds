@@ -3,24 +3,22 @@ ENTRY(_start)
 
 SECTIONS
 { 
-	firtst 0x00000000 : 
-  	{
-		./3_level/arm920t/s3c2440/s3c2440_startup.o 
-		./3_level/bsp/nand/nand_boot.o
-  		__stepping_stone_end = .;
-  	}
-
-  	second 0x30100000 : AT(4096)
+  	second 0x30080000 : AT(0)
   	{ 
- 	  	*(.new_vector)
+		./3_level/arm920t/s3c2440/s3c2440_startup.o 
    	  	*(.text)
   	  	*(.rodata*)
   	  	*(.data)
   	  	*(.got*)
 		*(.gnu.linkonce*)
+
+  	    . = ALIGN(4);
+		__new_vector_start = .;
+ 	  	*(.new_vector)
+		__new_vector_end = .;
   	}
 
-   	.bss : 
+    .bss : 
   	{
   	    . = ALIGN(4);
   	    __bss_start = .; 
