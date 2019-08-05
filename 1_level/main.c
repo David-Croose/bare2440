@@ -16,10 +16,11 @@ extern unsigned int __new_vector_end;
 
 static void move_program(void)
 {
-    /// memcpy((void *)0x30100000, &__new_vector_start, &__new_vector_end - &__new_vector_start);
-
     volatile unsigned int *d, *s;
 
+    /*
+     * it won't work if you use memcpy here
+     */
     for (d = (volatile unsigned int *)0x30100000, s = &__new_vector_start;
          s < &__new_vector_end; d++, s++) {
         *d = *s;
@@ -41,7 +42,7 @@ int main(void)
 	led_ctrl(1, 0);
 	led_ctrl(2, 0);
 	led_ctrl(4, 0);
-	/// key_irq_enable();
+	key_irq_enable();
 	/// timer0_init(1000);
 	/// timer4_init(100);
 	my_printf("start\r\n");
