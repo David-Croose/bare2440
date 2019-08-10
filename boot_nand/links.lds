@@ -1,4 +1,4 @@
-UTPUT_ARCH(arm)
+OUTPUT_ARCH(arm)
 ENTRY(_start)
 
 SECTIONS

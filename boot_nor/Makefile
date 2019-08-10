@@ -5,7 +5,7 @@ CFLAGS = -Wall -O0 -g
 
 # target files, remember:the startup.S(containing the entry function of 
 # the project) must in the first place!
-TARGET = bare2440_V5.6
+TARGET = bare2440
 SRC = ./3_level/arm920t/s3c2440/s3c2440_startup.S \
       ./3_level/arm920t/s3c2440/s3c2440.c \
 	  ./3_level/arm920t/s3c2440/s3c2440_it.c \
