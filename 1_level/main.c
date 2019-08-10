@@ -29,6 +29,9 @@ static void move_program(void)
 
 int main(void)
 {
+    int n = 0;
+
+    *(vu32 *)INTMSK = 0xFFFFFFFF;       /* close all irq */
 	create_page_table();
 	mmu_init();
     move_program();
@@ -51,16 +54,19 @@ int main(void)
 	my_printf("__new_vector_start=0x%08x\r\n", &__new_vector_start);
 	my_printf("__new_vector_end=0x%08x\r\n", &__new_vector_end);
 
-	/// lcd_init();
-	/// lcd_clear(5 << 11);
-	/// lcd_draw_point(10, 10, 0xFFFF);
+	lcd_init();
+	lcd_clear(5 << 11);
+	lcd_draw_point(10, 10, 0xFFFF);
+	lcd_draw_point(100, 10, 0xFFFF);
 
 	while(1)
 	{
 		led_ctrl(1, 1);
-		delay_rough_ms(100);
+		delay_rough_ms(5000);
 		led_ctrl(1, 0);
-		delay_rough_ms(100);
+		delay_rough_ms(5000);
+        lcd_clear((n += 579, n));
+        /// lcd_fill_rect(20, 180, 400, 270, (n += 579, n));
 	}
 }
 

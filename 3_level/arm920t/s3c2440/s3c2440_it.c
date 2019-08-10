@@ -90,7 +90,7 @@ void irq_handler(void)
 	// no need to care SRCPND whether it has been cleared
 	if((*(vu32 *)INTPND) != 0)
 	{
-		my_printf("Warning : INTPND(0x%X) had not been clear over yet !\r\n", *(vu32 *)INTPND);
+		/// my_printf("Warning : INTPND(0x%X) had not been clear over yet !\r\n", *(vu32 *)INTPND);
 	}
 	if((*(vu32 *)SUBSRCPND) != 0)
 	{
