@@ -5,7 +5,7 @@ CFLAGS = -Wall -O0 -g
 
 # target files, remember:the startup.S(containing the entry function of 
 # the project) must in the first place!
-TARGET = bare2440
+TARGET = bare2440_boot_from_nor
 SRC = ./3_level/arm920t/s3c2440/s3c2440_startup.S \
       ./3_level/arm920t/s3c2440/s3c2440.c \
 	  ./3_level/arm920t/s3c2440/s3c2440_it.c \
@@ -51,7 +51,7 @@ SIZE    = $(CROSS_COMPILER)size
 OBJCOPY = $(CROSS_COMPILER)objcopy
 OBJDUMP = $(CROSS_COMPILER)objdump
 
-TARGET_ELF = $(TARGET)_elf
+TARGET_ELF = $(TARGET).elf
 TARGET_DIS = $(TARGET).dis
 TARGET_BIN = $(TARGET).bin
 
@@ -75,5 +75,9 @@ $(TARGET) : $(OBJ)
 
 clean :
 	@rm -f $(TARGET_ELF) $(TARGET_DIS) $(TARGET_BIN) $(OBJ)
+	@rm -f 1_level/boot.h
+	@rm -f links.lds
+	@rm -f Makefile
+	@rm -f 3_level/arm920t/s3c2440/s3c2440_startup.S
 	@echo "  clean over\n"
 
