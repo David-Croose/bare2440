@@ -1,0 +1,63 @@
+; Installation inf for the Intel 82930 USB Bulk IO Test Board
+;
+; (c) Copyright 1999 Microsoft
+;
+
+[Version]
+Signature="$CHICAGO$"
+Class=USB
+ClassGUID={36FC9E60-C465-11CF-8056-444553540000}
+provider=%MSFT%
+DriverVer=08/08/2010,6.5.9.0
+CatalogFile=secbulk.cat
+
+[SourceDisksNames]
+1=%Disk_Description%,,,
+
+[SourceDisksFiles]
+SECBULK.sys = 1
+
+[Manufacturer]
+%MfgName%=100ASK,NTamd64
+
+
+[100ASK.NTamd64]
+%USB\VID_5345&PID_1234.DeviceDesc%=SECBULK.Dev, USB\VID_5345&PID_1234
+
+[DestinationDirs]
+SECBULK.Files.Ext = 10,System32\Drivers
+
+[SECBULK.Dev.NT]
+CopyFiles=SECBULK.Files.Ext
+
+[SECBULK.Dev.NT.Services]
+Addservice = SECBULK, 0x00000002, SECBULK.AddService
+
+[SECBULK.AddService]
+DisplayName    = %SECBULK.SvcDesc%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\System32\Drivers\secbulk.sys
+AddReg         = SECBULK.AddReg
+LoadOrderGroup = Base
+
+[SECBULK.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,secbulk.sys
+HKR,"Parameters","MaximumTransferSize",0x10001,4096
+HKR,"Parameters","DebugLevel",0x10001,2
+HKR,"Parameters","BulkUsbEnable",0x10001,1
+
+[SECBULK.Files.Ext]
+secbulk.sys
+
+;---------------------------------------------------------------;
+
+[Strings]
+MSFT="Microsoft"
+FARM="100ASK"
+MfgName="100ASK"
+Disk_Description="SecBulk Installation Disk"
+USB\VID_5345&PID_1234.DeviceDesc="100ASK eBlocks SEC SOC Test Board"
+SECBULK.SvcDesc="SecBulk.Sys S3C2440 USB Driver"
