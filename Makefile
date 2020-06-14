@@ -19,6 +19,28 @@ SRC = ./3_level/arm920t/s3c2440/s3c2440_startup.S \
 	  ./3_level/bsp/nand/nand.c \
 	  ./3_level/bsp/nand/nand_boot.c \
 	  ./3_level/bsp/lcd/lcd.c \
+tinyusb/src/host/usbh.c \
+tinyusb/src/host/ehci/ehci.c \
+tinyusb/src/host/ohci/ohci.c \
+tinyusb/src/host/hub.c \
+tinyusb/src/class/usbtmc/usbtmc_device.c \
+tinyusb/src/class/net/net_device.c \
+tinyusb/src/class/bth/bth_device.c \
+tinyusb/src/class/vendor/vendor_host.c \
+tinyusb/src/class/vendor/vendor_device.c \
+tinyusb/src/class/hid/hid_host.c \
+tinyusb/src/class/hid/hid_device.c \
+tinyusb/src/class/dfu/dfu_rt_device.c \
+tinyusb/src/class/midi/midi_device.c \
+tinyusb/src/class/cdc/cdc_device.c \
+tinyusb/src/class/cdc/cdc_rndis_host.c \
+tinyusb/src/class/cdc/cdc_host.c \
+tinyusb/src/class/msc/msc_device.c \
+tinyusb/src/class/msc/msc_host.c \
+tinyusb/src/device/usbd.c \
+tinyusb/src/device/usbd_control.c \
+tinyusb/src/tusb.c \
+tinyusb/src/common/tusb_fifo.c \
 	  ./1_level/main.c \
 	  ./1_level/public/clib.c \
 	  ./1_level/public/crc.c \
@@ -35,7 +57,24 @@ INC = -I./1_level \
       -I./3_level/bsp/uart \
       -I./3_level/bsp/nand \
       -I./3_level/bsp/timer \
-      -I./3_level/bsp/lcd
+      -I./3_level/bsp/lcd \
+-I./3_level/bsp/tinyusb/src/host/ehci/ \
+-I./3_level/bsp/tinyusb/src/host/ohci/ \
+-I./3_level/bsp/tinyusb/src/host/ \
+-I./3_level/bsp/tinyusb/src/class/usbtmc/ \
+-I./3_level/bsp/tinyusb/src/class/net/ \
+-I./3_level/bsp/tinyusb/src/class/audio/ \
+-I./3_level/bsp/tinyusb/src/class/bth/ \
+-I./3_level/bsp/tinyusb/src/class/vendor/ \
+-I./3_level/bsp/tinyusb/src/class/hid/ \
+-I./3_level/bsp/tinyusb/src/class/dfu/ \
+-I./3_level/bsp/tinyusb/src/class/midi/ \
+-I./3_level/bsp/tinyusb/src/class/cdc/ \
+-I./3_level/bsp/tinyusb/src/class/msc/ \
+-I./3_level/bsp/tinyusb/src/device/ \
+-I./3_level/bsp/tinyusb/src/osal/ \
+-I./3_level/bsp/tinyusb/src/ \
+-I./3_level/bsp/tinyusb/src/common/
 
 # you may need to add some archive lib here
 SLIB =	`$(CC) -print-file-name=libc.a` \
