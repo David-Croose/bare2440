@@ -11,6 +11,7 @@
 #include "lcd.h"
 #include "printf.h"
 #include "s3c2440_it.h"
+#include "tusb.h"
 
 int main(void)
 {
@@ -45,12 +46,17 @@ int main(void)
 	lcd_draw_point(100, 10, 0xFFFF);
     lcd_fill_rect(20, 60, 80, 100, (n += 579, n));
 
+	tusb_init();
+
+	n = 0;
 	while(1)
 	{
-		led_ctrl(1, 1);
-		delay_rough_ms(5000);
-		led_ctrl(1, 0);
-		delay_rough_ms(5000);
+		tuh_task();
+
+		if (++n % 100 == 0)
+			led_ctrl(1, 1);
+		else
+			led_ctrl(1, 0);
 	}
 }
 
