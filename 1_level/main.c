@@ -64,11 +64,7 @@ int main(void)
 	while(1)
 	{
 		tuh_task();
-
-		if (++n % 100 == 0)
-			led_ctrl(1, 1);
-		else
-			led_ctrl(1, 0);
+		led_ctrl(1, (++n / 100000 % 2));
 	}
 }
 
