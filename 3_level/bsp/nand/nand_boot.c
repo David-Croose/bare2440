@@ -1,6 +1,6 @@
 #include "nand.h"
 
-#define SECTION	__attribute__((__section__(".boot")))
+#define SECTION	__attribute__((__section__(".boot.2")))
 
 static void SECTION nand_select(bool flag)
 {

@@ -32,10 +32,11 @@ static void move_program(void)
 
 static void greeting(void)
 {
+	my_printf("\r\n");
 	my_printf("==============================================================\r\n");
 	my_printf("\r\n");
-	my_printf("							bare2440\r\n");
-	my_printf("			enter 'help' to see supported instructions\r\n");
+	my_printf("                      bare2440\r\n");
+	my_printf("       enter 'help' to see supported instructions\r\n");
 	my_printf("\r\n");
 	my_printf("==============================================================\r\n");
 }

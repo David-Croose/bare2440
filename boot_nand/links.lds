@@ -5,7 +5,8 @@ SECTIONS
 { 
 	firtst 0x00000000 : 
   	{
- 	  	*(.boot)
+ 	  	*(.boot.1)
+ 	  	*(.boot.2)
   		__stepping_stone_end = .;
   	}
 
