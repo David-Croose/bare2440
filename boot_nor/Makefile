@@ -1,7 +1,7 @@
 #======================================================================
 # specify the compiler and it's compile options
 CROSS_COMPILER ?= arm-linux-
-CFLAGS = -Wall -O0 -g
+CFLAGS = -Wall -O0 -g -std=c99
 
 # target files, remember:the startup.S(containing the entry function of 
 # the project) must in the first place!
@@ -18,6 +18,27 @@ SRC = ./3_level/arm920t/s3c2440/s3c2440_startup.S \
 	  ./3_level/bsp/timer/timer4.c \
 	  ./3_level/bsp/nand/nand.c \
 	  ./3_level/bsp/lcd/lcd.c \
+	  ./3_level/bsp/tinyusb/host/usbh.c \
+	  ./3_level/bsp/tinyusb/host/ohci/ohci.c \
+	  ./3_level/bsp/tinyusb/host/hub.c \
+	  ./3_level/bsp/tinyusb/class/usbtmc/usbtmc_device.c \
+	  ./3_level/bsp/tinyusb/class/net/net_device.c \
+	  ./3_level/bsp/tinyusb/class/bth/bth_device.c \
+	  ./3_level/bsp/tinyusb/class/vendor/vendor_host.c \
+	  ./3_level/bsp/tinyusb/class/vendor/vendor_device.c \
+	  ./3_level/bsp/tinyusb/class/hid/hid_host.c \
+	  ./3_level/bsp/tinyusb/class/hid/hid_device.c \
+	  ./3_level/bsp/tinyusb/class/dfu/dfu_rt_device.c \
+	  ./3_level/bsp/tinyusb/class/midi/midi_device.c \
+	  ./3_level/bsp/tinyusb/class/cdc/cdc_device.c \
+	  ./3_level/bsp/tinyusb/class/cdc/cdc_rndis_host.c \
+	  ./3_level/bsp/tinyusb/class/cdc/cdc_host.c \
+	  ./3_level/bsp/tinyusb/class/msc/msc_device.c \
+	  ./3_level/bsp/tinyusb/class/msc/msc_host.c \
+	  ./3_level/bsp/tinyusb/device/usbd.c \
+	  ./3_level/bsp/tinyusb/device/usbd_control.c \
+	  ./3_level/bsp/tinyusb/tusb.c \
+	  ./3_level/bsp/tinyusb/common/tusb_fifo.c \
 	  ./1_level/main.c \
 	  ./1_level/public/clib.c \
 	  ./1_level/public/crc.c \
@@ -34,7 +55,24 @@ INC = -I./1_level \
       -I./3_level/bsp/uart \
       -I./3_level/bsp/nand \
       -I./3_level/bsp/timer \
-      -I./3_level/bsp/lcd
+      -I./3_level/bsp/lcd \
+	  -I./3_level/bsp/tinyusb/host/ehci/ \
+	  -I./3_level/bsp/tinyusb/host/ohci/ \
+	  -I./3_level/bsp/tinyusb/host/ \
+	  -I./3_level/bsp/tinyusb/class/usbtmc/ \
+	  -I./3_level/bsp/tinyusb/class/net/ \
+	  -I./3_level/bsp/tinyusb/class/audio/ \
+	  -I./3_level/bsp/tinyusb/class/bth/ \
+	  -I./3_level/bsp/tinyusb/class/vendor/ \
+	  -I./3_level/bsp/tinyusb/class/hid/ \
+	  -I./3_level/bsp/tinyusb/class/dfu/ \
+	  -I./3_level/bsp/tinyusb/class/midi/ \
+	  -I./3_level/bsp/tinyusb/class/cdc/ \
+	  -I./3_level/bsp/tinyusb/class/msc/ \
+	  -I./3_level/bsp/tinyusb/device/ \
+	  -I./3_level/bsp/tinyusb/osal/ \
+	  -I./3_level/bsp/tinyusb/ \
+	  -I./3_level/bsp/tinyusb/common/
 
 # you may need to add some archive lib here
 SLIB =	`$(CC) -print-file-name=libc.a` \

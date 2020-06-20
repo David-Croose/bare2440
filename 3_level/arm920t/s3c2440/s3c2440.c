@@ -36,7 +36,22 @@ void s3c2440_clock_init(void)
 		"orr	r1, r1, #0xC0000000\r\n"
 		"mcr	p15, 0, r1, c1, c0, 0\r\n"
 	);
+
+	*(vu32 *)UPLLCON = (0x56 << 12) | (0x02 << 4) | (0x02);
+
+	__asm__ __volatile__("mov\tr0,r0\t@ nop\n\t");
+	__asm__ __volatile__("mov\tr0,r0\t@ nop\n\t");
+	__asm__ __volatile__("mov\tr0,r0\t@ nop\n\t");
+	__asm__ __volatile__("mov\tr0,r0\t@ nop\n\t");
+	__asm__ __volatile__("mov\tr0,r0\t@ nop\n\t");
+	__asm__ __volatile__("mov\tr0,r0\t@ nop\n\t");
+	__asm__ __volatile__("mov\tr0,r0\t@ nop\n\t");
+	__asm__ __volatile__("mov\tr0,r0\t@ nop\n\t");
+
 	*(vu32 *)MPLLCON = (0x5C << 12) | (0x01 << 4) | (0x01);
+
+	*(vu32 *)CLKSLOW &= ~(1 << 7);		// UCLK ON
+
 	fclk = 400000000;  // 400MHz
 	hclk = fclk / 4;   // 100MHz
 	pclk = fclk / 8;   // 50MHz

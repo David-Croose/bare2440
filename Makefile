@@ -5,7 +5,7 @@ CFLAGS = -Wall -O0 -g -std=c99
 
 # target files, remember:the startup.S(containing the entry function of 
 # the project) must in the first place!
-TARGET = bare2440_boot_from_nand
+TARGET = bare2440_boot_from_nor
 SRC = ./3_level/arm920t/s3c2440/s3c2440_startup.S \
       ./3_level/arm920t/s3c2440/s3c2440.c \
 	  ./3_level/arm920t/s3c2440/s3c2440_it.c \
@@ -17,7 +17,6 @@ SRC = ./3_level/arm920t/s3c2440/s3c2440_startup.S \
 	  ./3_level/bsp/timer/timer0.c \
 	  ./3_level/bsp/timer/timer4.c \
 	  ./3_level/bsp/nand/nand.c \
-	  ./3_level/bsp/nand/nand_boot.c \
 	  ./3_level/bsp/lcd/lcd.c \
 	  ./3_level/bsp/tinyusb/host/usbh.c \
 	  ./3_level/bsp/tinyusb/host/ohci/ohci.c \
@@ -114,5 +113,9 @@ $(TARGET) : $(OBJ)
 
 clean :
 	@rm -f $(TARGET_ELF) $(TARGET_DIS) $(TARGET_BIN) $(OBJ)
+	@rm -f 1_level/boot.h
+	@rm -f links.lds
+	@rm -f Makefile
+	@rm -f 3_level/arm920t/s3c2440/s3c2440_startup.S
 	@echo "  clean over\n"
 
