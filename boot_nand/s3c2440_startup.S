@@ -24,11 +24,11 @@
 #define  CLKDIV         0x4C000014
 #define  MPLLCON        0x4C000004
 
-.section .boot.1
-
 .extern main
+
 .text
 .global _start
+.section .boot.1
 _start:
 	b   Reset
 	b   HandleUndef
