@@ -25,8 +25,10 @@
 #define  MPLLCON        0x4C000004
 
 .extern main
+
 .text
 .global _start
+.section .boot.1
 _start:
 	b   Reset
 	b   HandleUndef

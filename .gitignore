@@ -54,4 +54,6 @@ dkms.conf
 # sam add
 tags
 dnw.ini
-
+*.bin
+*.dis
+*.elf

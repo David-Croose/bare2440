@@ -1,5 +1,4 @@
 #include <string.h>
-#include "boot.h"
 #include "config.h"
 #include "delay.h"
 #include "led.h"
@@ -12,6 +11,35 @@
 #include "printf.h"
 #include "s3c2440_it.h"
 #include "tusb.h"
+
+#ifdef BOOTING_FROM_NORFLASH
+extern unsigned int __new_vector_start;
+extern unsigned int __new_vector_end;
+
+static void move_program(void)
+{
+    volatile unsigned int *d, *s;
+
+    /*
+     * it won't work if you use memcpy here
+     */
+    for (d = (volatile unsigned int *)0x30100000, s = &__new_vector_start;
+         s < &__new_vector_end; d++, s++) {
+        *d = *s;
+    }
+}
+#endif
+
+static void greeting(void)
+{
+	my_printf("\r\n");
+	my_printf("==============================================================\r\n");
+	my_printf("\r\n");
+	my_printf("                      bare2440\r\n");
+	my_printf("       enter 'help' to see supported instructions\r\n");
+	my_printf("\r\n");
+	my_printf("==============================================================\r\n");
+}
 
 int main(void)
 {
@@ -38,7 +66,7 @@ int main(void)
     timer0_disable();
 	timer4_init(100);
     timer4_disable();
-	my_printf("start\r\n");
+	greeting();
 
 	//===============================================================
 	/// these code below will cause data-abort bug

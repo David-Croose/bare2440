@@ -1,6 +1,8 @@
 #include "nand.h"
 
-static void nand_select(bool flag)
+#define SECTION	__attribute__((__section__(".boot.2")))
+
+static void SECTION nand_select(bool flag)
 {
 	int i;
 
@@ -15,12 +17,12 @@ static void nand_select(bool flag)
 	for(i = 0; i < 10; i ++);
 }
 
-static void nand_send_cmd(u8 cmd)
+static void SECTION nand_send_cmd(u8 cmd)
 {
 	*(vu32 *)NFCMD = cmd;
 }
 
-static void nand_send_addr(u32 addr)
+static void SECTION nand_send_addr(u32 addr)
 {
 	u32 i, col, page;
 	vu8 *p = (vu8 *)NFADDR;
@@ -40,7 +42,7 @@ static void nand_send_addr(u32 addr)
 	for(i = 0; i < 10; i ++);
 }
 
-static void nand_wati_idle(void)
+static void SECTION nand_wati_idle(void)
 {
 	int i;
 
@@ -50,12 +52,12 @@ static void nand_wati_idle(void)
 	}
 }
 
-static u8 nand_read_byte_raw(void)
+static u8 SECTION nand_read_byte_raw(void)
 {
 	return *(vu8 *)NFDATA;
 }
 
-static void nand_reset(void)
+static void SECTION nand_reset(void)
 {
 	nand_select(TRUE);
 	nand_send_cmd(0xFF);
@@ -63,7 +65,7 @@ static void nand_reset(void)
 	nand_select(FALSE);
 }
 
-void nand_boot_init(void)
+void SECTION nand_boot_init(void)
 {
 	*(vu32 *)NFCONF = (TACLS << 12) | (TWRPH0 << 8) | (TWRPH1 << 4);
 	*(vu32 *)NFCONT = (1 << 4) | (1 << 1) | (1 << 0);
@@ -76,7 +78,7 @@ void nand_boot_init(void)
  * @param buf  : the buffer in sdram or sram to copy to
  * @param page : how many pages to copy
  */
-void nand_boot_copy2sdram(u32 addr, u8 *buf, u32 pages)
+void SECTION nand_boot_copy2sdram(u32 addr, u8 *buf, u32 pages)
 {
 	u32 i, j;
 
