@@ -1,7 +1,7 @@
 /**
  * File:s3c2440_start.S
  * Author:Sam Hotiky
- * Description:boot routine for JZ2440 board(CPU:S3C2440A,400MHz,ARM920T;SDRAM:128MB;NANDFLASH:256MB;NORFLASH:2MB;etc
+ * Description:boot routine for JZ2440 board(CPU:S3C2440A,400MHz,ARM920T;SDRAM:64MB;NANDFLASH:256MB;NORFLASH:2MB;etc
  */
 
 /**

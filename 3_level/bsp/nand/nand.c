@@ -5,7 +5,7 @@
  * block total : 2048
  * block size  : 128KB
  * how many pages per block : 64
- * how many bytes per page  : 2048KB
+ * how many bytes per page  : 2048B
  * how many bytes per spare of page : 64B
  */
 #include "nand.h"

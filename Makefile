@@ -144,8 +144,7 @@ endif
 	@echo
 	@echo "note:"
 	@echo "	* it's forbidden to set the entry address to 0x30000000 in the link script, cause that's the MMU memory map table."
-	@echo "	* you may need to change the copy size(a parameter of nand_boot_copy2sdram) of nand flash image when your image which booting from nand is too large."
-	@echo "	* you need to input 'make BOOT=nor clean' to clean the build after you compile with 'make BOOT=nor'."
+	@echo "	* you need to input 'make BOOT=nor clean' to clean the build targets after you compiled with 'make BOOT=nor'."
 	@echo
 
 clean:

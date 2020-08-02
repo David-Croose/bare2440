@@ -1,7 +1,7 @@
 /**
  * File:s3c2440_start.S
  * Author:Sam Hotiky
- * Description:boot routine for JZ2440 board(CPU:S3C2440A,400MHz,ARM920T;SDRAM:128MB;NANDFLASH:256MB;NORFLASH:2MB;etc
+ * Description:boot routine for JZ2440 board(CPU:S3C2440A,400MHz,ARM920T;SDRAM:64MB;NANDFLASH:256MB;NORFLASH:2MB;etc
  */
 
 /**
@@ -119,9 +119,24 @@ Reset:
 	 */
 	ldr		sp, =0x34000000
 	bl		nand_boot_init
+calc_pages:
+	ldr		r1, =__bss_start
+	ldr		r0, =__image_start
+	sub		r0, r1, r0		/* r0 = image_bytes */
+	mov		r3, #0
+	ldr		r1, =0x7FF
+	and		r1, r0, r1
+	cmp		r1, #0
+	movne	r3, #1			/* if (r0 % 2048) r3 = 1; else r3 = 0; */
+	mov		r0, r0, lsr#11	/* r0 = r0 / 2048 = total_pages */
+	cmp		r3, #0
+	addne	r0, r0, #1
+	cmp		r0, #131072		/* if (r0 > total_pages) hang() */
+	bgt		halt_loop
+	mov		r2, r0
+
 	ldr		r0, =4096
 	ldr		r1, =0x30100000
-	ldr		r2, =30
 	bl		nand_boot_copy2sdram
 
 	/**

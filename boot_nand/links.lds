@@ -11,7 +11,9 @@ SECTIONS
   	}
 
   	second 0x30100000 : AT(4096)
-  	{ 
+  	{
+  		. = ALIGN(4);
+  		__image_start = .;
  	  	*(.new_vector)
    	  	*(.text)
   	  	*(.rodata*)
