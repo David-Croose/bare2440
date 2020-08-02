@@ -57,3 +57,7 @@ dnw.ini
 *.bin
 *.dis
 *.elf
+.cproject
+.project
+.settings/
+
