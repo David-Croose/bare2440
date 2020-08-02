@@ -28,7 +28,11 @@
 
 .text
 .global _start
+
+#ifndef BOOTING_FROM_NORFLASH
 .section .boot.1
+#endif
+
 _start:
 	b   Reset
 	b   HandleUndef
@@ -47,6 +51,7 @@ Reset:
 	mov		r1, #0
 	str		r1, [r0]
 
+#ifndef BOOTING_FROM_NORFLASH
 	/**
 	 * make the clock run in 400MHz
 	 */
@@ -138,6 +143,7 @@ calc_pages:
 	ldr		r0, =4096
 	ldr		r1, =0x30100000
 	bl		nand_boot_copy2sdram
+#endif
 
 	/**
 	 * clear bss
