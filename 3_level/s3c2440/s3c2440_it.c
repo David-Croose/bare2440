@@ -62,7 +62,6 @@ void not_used_handler(void)
  */
 void irq_handler(void)
 {
-	/// my_printf("irq_handler, cpsr = %#x\r\n", get_cpsr());
 	u32 i;
 
 	vu32 intpnd    = *(vu32 *)INTPND;
@@ -78,9 +77,6 @@ void irq_handler(void)
 	timer0_overflow_irq_handler(intpnd);
 	timer4_overflow_irq_handler(intpnd);
 	key_irq_handler(intpnd, eintpnd);
-#if CFG_TUSB_RHPORT0_MODE & OPT_MODE_HOST
-    tuh_isr(0);
-#endif
 
 	// make sure the pending registers had been clear out
 	for(i = 0; i < 3; i++)
@@ -114,4 +110,3 @@ void fiq_handler(void)
 
 	}
 }
-

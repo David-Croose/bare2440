@@ -68,30 +68,9 @@ int main(void)
     timer4_disable();
 	greeting();
 
-	//===============================================================
-	/// these code below will cause data-abort bug
-	/// lcd_init();
-	/// lcd_clear(5 << 11);
-	/// lcd_draw_point(10, 10, 0xFFFF);
-	/// lcd_draw_point(100, 10, 0xFFFF);
-    /// lcd_fill_rect(20, 60, 80, 100, (n += 579, n));
-	//===============================================================
-
-	//===============================================================
-	// USB initialization
-	*(vu32 *)MISCCR |= 1 << 13;			// USB Port1 in suspend mode, can be Host or Device
-	*(vu32 *)MISCCR &= ~(1 << 12);		// USB Port0 in normal mode, can be Host only
-
-	clock_enable(CLKSRC_USBH);			// USB clock enable
-	*(vu32 *)INTMSK &= ~(1 << 26);		// USB Host interrupt enable
-	//===============================================================
-
-	tusb_init();
-
 	n = 0;
 	while(1)
 	{
-		tuh_task();
 		led_ctrl(1, (++n / 100000 % 2));
 	}
 }
@@ -104,4 +83,3 @@ int raise(int a)
 {
 	return 0;
 }
-
